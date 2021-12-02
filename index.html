@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>Coming Soon</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+		<link rel="stylesheet" type="text/css" href="css/util.css">
+		<link rel="stylesheet" type="text/css" href="css/main.css">
+	</head>
+	<body>
+		<div class="bg-g1 size1 flex-w flex-col-c-sb p-l-15 p-r-15 p-t-55 p-b-35 respon1">
+			<span></span>
+			<div class="flex-col-c p-t-50 p-b-50">
+				<h3 class="l1-txt1 txt-center p-b-10">
+					Coming Soon
+				</h3>
+				<p class="txt-center l1-txt2 p-b-60">
+					We're building something exciting.
+				</p>
+				<div class="flex-w flex-c cd100 p-b-82">
+					<div class="flex-col-c-m size2 how-countdown">
+						<span class="l1-txt3 p-b-9 days" id="days"></span>
+						<span class="s1-txt1">Days</span>
+					</div>
+					<div class="flex-col-c-m size2 how-countdown">
+						<span class="l1-txt3 p-b-9 hours" id="hours"></span>
+						<span class="s1-txt1">Hours</span>
+					</div>
+					<div class="flex-col-c-m size2 how-countdown">
+						<span class="l1-txt3 p-b-9 minutes" id="minutes"></span>
+						<span class="s1-txt1">Minutes</span>
+					</div>
+					<div class="flex-col-c-m size2 how-countdown">
+						<span class="l1-txt3 p-b-9 seconds" id="seconds"></span>
+						<span class="s1-txt1">Seconds</span>
+					</div>
+				</div>
+			</div>
+			<span class="s1-txt3 txt-center">
+				@ 2021 3rd eye entertainment
+			</span>
+		</div>
+		<script src="vendor/jquery/jquery-3.2.1.min.js"></script>
+		<script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+		<script>
+			(function () {
+				const second = 1000,
+						minute = second * 60,
+						hour = minute * 60,
+						day = hour * 24;
+
+				let today = new Date(),
+				dd = String(today.getDate()).padStart(2, "0"),
+				mm = String(today.getMonth() + 1).padStart(2, "0"),
+				yyyy = today.getFullYear(),
+				nextYear = yyyy + 1,
+				dayMonth = "01/02/",
+				birthday = dayMonth + yyyy;
+
+				today = mm + "/" + dd + "/" + yyyy;
+				if (today > birthday) {
+					birthday = dayMonth + nextYear;
+				}
+
+				const countDown = new Date(birthday).getTime(),
+				x = setInterval(function () {
+					const now = new Date().getTime(),
+					distance = countDown - now;
+					document.getElementById("days").innerText = Math.floor(distance / (day)),
+					document.getElementById("hours").innerText = Math.floor((distance % (day)) / (hour)),
+					document.getElementById("minutes").innerText = Math.floor((distance % (hour)) / (minute)),
+					document.getElementById("seconds").innerText = Math.floor((distance % (minute)) / second);
+				}, 0)
+			}());
+		</script>
+	</body>
+</html>
